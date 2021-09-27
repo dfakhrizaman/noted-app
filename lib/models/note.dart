@@ -1,11 +1,12 @@
 class NoteModel {
-  // final int id;
+  final int id;
   final String title;
   final String description;
-  final String date;
-  final int isDone;
+  String date;
+  int isDone;
 
   NoteModel({
+    this.id = 0,
     required this.title,
     required this.description,
     required this.date,
@@ -14,7 +15,7 @@ class NoteModel {
 
   factory NoteModel.fromJSON(Map<String, dynamic> json) {
     return NoteModel(
-      // id: json['id'],
+      id: json['id'],
       title: json['title'],
       description: json['description'],
       date: json['date'],
@@ -24,7 +25,7 @@ class NoteModel {
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> json = {};
-    // json['id'] = id;
+
     json['title'] = title;
     json['description'] = description;
     json['date'] = date;

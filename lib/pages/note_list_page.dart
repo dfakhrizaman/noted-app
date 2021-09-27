@@ -65,6 +65,7 @@ class _NoteListPageState extends State<NoteListPage> {
                       return NoteTile(
                         title: model.notesList[index].title,
                         description: model.notesList[index].description,
+                        note: model.notesList[index],
                         onPress: () {
                           Navigator.pushNamed(
                             context,

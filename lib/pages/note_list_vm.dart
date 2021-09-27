@@ -16,4 +16,26 @@ class NoteListViewModel with ChangeNotifier {
     isLoading = false;
     notifyListeners();
   }
+
+  void deleteNote(int id) async {
+    print('ddd $id');
+    isLoading = true;
+
+    int result = await databaseHandler.deleteNote(id);
+    _notesList.removeWhere((element) => element.id == id);
+
+    print(result);
+    isLoading = false;
+
+    notifyListeners();
+  }
+
+  void updateStatus(NoteModel note, bool isDone) async {
+    isDone ? note.isDone = 1 : note.isDone = 0;
+
+    print(note.isDone);
+    databaseHandler.updateNote(note);
+
+    notifyListeners();
+  }
 }

@@ -22,13 +22,17 @@ class NewNoteViewModel with ChangeNotifier {
     _description = newValue;
   }
 
-  void createDate() {
+  String createDate() {
     var now = new DateTime.now();
-    var formatter = new DateFormat('dd-MM-yyyy');
+    var formatter = new DateFormat('dd/MM/yyyy');
     _date = formatter.format(now);
+
+    return _date;
   }
 
   void addNote(NoteModel note) async {
+    note.date = createDate();
+
     int result = await databaseHandler.insertNote(note);
     print(result);
     notifyListeners();

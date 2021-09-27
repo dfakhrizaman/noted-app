@@ -67,28 +67,29 @@ class DatabaseHandler {
     return result;
   }
 
-  // Update a note in db
-  // Future<int> updateNote(NoteModel note) async {
-  //   final db = await instance.database;
-  //   var result = await db.update(
-  //     notesTable,
-  //     note.toMap(),
-  //     where: '$colId = ?',
-  //     whereArgs: [note.id],
-  //   );
-
-  //   return result;
-  // }
-
   // Delete a note in db
-  // Future<int> deleteNote(NoteModel note) async {
-  //   final db = await instance.database;
+  Future<int> deleteNote(int id) async {
+    final db = await instance.database;
 
-  //   int result =
-  //       await db.rawDelete('DELETE FROM $notesTable WHERE $colId = ${note.id}');
+    int result =
+        await db.rawDelete('DELETE FROM $notesTable WHERE $colId = $id');
 
-  //   return result;
-  // }
+    return result;
+  }
+
+  // Update a note in db
+  Future<int> updateNote(NoteModel note) async {
+    final db = await instance.database;
+
+    int result = await db.update(
+      notesTable,
+      note.toMap(),
+      where: '$colId = ?',
+      whereArgs: [note.id],
+    );
+
+    return result;
+  }
 
   // Get number of notes in db
   Future getCount() async {
